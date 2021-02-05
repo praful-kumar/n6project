@@ -108,6 +108,7 @@ router.get('/post/:postid/react', isLogggedin, (req, res) => {
 router.post('/message/:userid', (req, res) => {
   userModal.findOne({ username: req.session.passport.user })
     .then((loggedUser) => {
+      
       userModal.findOne({ _id: req.params.userid })
         .then((sentUser) => {
           console.log(sentUser.chatid, 'loggeduser') //consloe loggedusr
@@ -122,9 +123,11 @@ router.post('/message/:userid', (req, res) => {
                 member2: req.params.userid,
               })
                 .then((chatdata) => {
+                  
                   chatdata.messages.push({
                     auther: loggedUser.username,
-                    msgbody: req.body.message
+                    msgbody: req.body.message,
+                    msgTime:new Date()
                   })
                   chatdata.save()
                     .then((messagedone) => {
@@ -145,7 +148,8 @@ router.post('/message/:userid', (req, res) => {
                 .then((chatdata) => {
                   chatdata.messages.push({
                     auther: loggedUser.username,
-                    msgbody: req.body.message
+                    msgbody: req.body.message,
+                    msgTime:new Date()
                   })
                   chatdata.save()
                     .then((messagedone) => {

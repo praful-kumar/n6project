@@ -12,10 +12,7 @@ const conSchema = mongoose.Schema({
     messages:[{
         auther:String,
         msgbody:String,
-        msgTime:{
-            type:String,
-            default:new Date()
-        }
+        msgTime:String
     }]
 })
 
